@@ -1,6 +1,3 @@
-function header() {
-  return `<img src="./assets/components/logo.svg" alt="">`;
-}
 function createGame(player1, hour, player2) {
   return `
   <li><img src="./assets/components/icon-${player1}.svg" alt="Flag of ${player1}">
@@ -9,37 +6,20 @@ function createGame(player1, hour, player2) {
       </li>
   `;
 }
+let delay = -0.3;
 function createCard(date, day, games) {
+  delay = delay + 0.3;
   return `
-  <div class="card">
-  <div class="card-info">
-    <img src="./assets/components/arrow-left.svg" alt="" width="30" class="img-app">
-    <h2>${date}<span>${day}</span></h2>
-    <img src="./assets/components/arrow-right.svg" alt="" width="30" class="img-app">
-  </div>
-  <div class="card-games">
+  <div class="card" style="animation-delay: ${delay}s">
+    <h2>${date}<span>${day}</span></h2> 
     <ul>
       ${games}
     </ul>
     </div>
-  </div>
   `;
 }
 
-document.querySelector("#app").innerHTML = ` 
-<header>
-${header()}
-</header>
-
-<main id="cards">
-${createCard("24/11", "Quinta", 
-createGame('brazil', '16:00', 'cameroon')
-)}
-${createCard("28/11", "Segunda",
-createGame('argentina', '18:00', 'hungary')
-)}
-${createCard("02/11", "sexta", 
-createGame('argentina', '18:00', 'hungary')
-)}
-</main>
-`;
+document.querySelector("#cards").innerHTML =
+  createCard("24/11", "Quinta", createGame("brazil", "16:00", "cameroon")) +
+  createCard("28/11", "Segunda", createGame("argentina", "18:00", "hungary")) +
+  createCard("02/11", "sexta", createGame("argentina", "18:00", "hungary"));
